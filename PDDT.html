@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class="nav">
+        <a href="index.html">Home</a>
+        <a href="BED.html">BIOLOGICAL EFFECTIVE DOSE (BED)</a>
+        <a href="PLS.html">DOSAGE ERRORS</a>
+        <a href="PDDT.html">REGIMEN TREATMENT CHANGE CALCULATOR</a>
+    </div>
+    <title>Regimen Treatment Change</title>
+    <link rel="stylesheet" href="PDDT.css">
+    <h1 class="h1">
+      <center>REGIMEN TREATMENT CHANGE CALCULATOR</center>
+    </h1>   
+</head>
+<body>
+    <div class="form-container">
+        <form id="calculatorForm">
+            <div>
+                <label for="n1">Number of Treatment Fractions 1 (n1):</label>
+                <input class="o" type="number" id="n1" step="1">
+            </div>
+            <br>
+            <div>
+                <label for="d1">Dose per Fraction in Gy 1 (d1):</label>
+                <input class="o" type="number" id="d1" step="0.1">
+            </div>
+            <br>
+            <div>
+                <label for="n2">Number of Treatment Fractions 2 (n2):</label>
+                <input class="o" type="number" id="n2" step="0.1">
+            </div>
+            <br>
+            <div>
+                <label for="d2">Dose per Fraction in Gy 2 (d2):</label>
+                <input class="o" type="number" id="d2" step="0.1">
+            </div>
+            <br>
+            <div>
+                <label for="alphaBetaRatio">Alpha/Beta Ratio (&alpha;/&beta;):</label>
+                <div class="input-group">
+                    <input type="range" class="r" id="alphaBetaRatio" min="1" max="16" step="0.1" value="1" oninput="updateSliderValue1()">
+                    <input type="text" class="o" id="alphaBetaValue" oninput="updateSliderFromInput1()">
+                </div>
+            </div>
+            <br>
+            <button onclick="calculateValues()"><b>Calculate</b></button>
+            <br>
+        </form>
+
+        <form id="csdlForm">
+            <div>
+                <p><em>Disclaimer: This calculator is offered freely as a helpful tool. All outputs should be independently verified, and the user is solely responsible for the use of the calculator and any results. Radformation disclaims any warranties and is not responsible for how this tool is utilized or the results it provides.</em></p>
+                <h2><b>BED CALCULATOR</b><br></h2>
+                <p>In a routine clinical environment, it can be difficult to determine the most effective fractionation for a patient undergoing treatment. Biological Effective Dose (BED) and Equivalent Dose in 2Gy Fractions (EQD2) are often used to quantify radiobiological concepts into concrete interpretable values. Here, we present a BED/EQD2 calculator and a brief background on the topic and its applications.</p>
+                <h4>Biologically Effective Dose—The Basics<br></h4>
+                <p>Biologically effective dose (BED), as coined by the British Journal of Radiology some three decades ago, is an attempt to quantify the biological effect (log cell kill) of radiation dose delivery. The formula for BED was derived from the familiar linear-quadratic cell survival model:</p>
+                <div class="img-box">
+                    <img src="https://blog.radformation.com/hs-fs/hubfs/Imported_Blog_Media/Eq-1-2.png?width=454&height=150&name=Eq-1-2.pngfasd" alt="E=αD+βD2">
+                </div>
+                <p>The equation determines the biological effect (E) as a function of dose (D), the linear dose damage response (α), and the quadratic dose response in tissue (β).</p>
+                <p>In general, cell injury can be classified into three categories.</p>
+                <ul>
+                    <li>Lethal damage: unrepairable and will lead to cell death</li>
+                    <li>Sublethal damage: interactions that are not singularly lethal but can combine to result in cell death</li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    <div id="resultContainer" class="cal"></div>
+
+    <script>
+        function updateSliderValue1() {
+            var slider1 = document.getElementById('alphaBetaRatio');
+            var valueDisplay1 = document.getElementById('alphaBetaValue');
+            valueDisplay1.value = slider1.value;
+        }
+
+        function updateSliderFromInput1() {
+            var slider1 = document.getElementById('alphaBetaRatio');
+            var valueDisplay1 = document.getElementById('alphaBetaValue');
+
+            if (parseFloat(valueDisplay1.value) >= 1 && parseFloat(valueDisplay1.value) <= 16) {
+                slider1.value = valueDisplay1.value;
+            } else {
+                alert('The Alpha/Beta Ratio is less than 16.');
+            }
+        }
+
+        function displayMessage(message) {
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerText = message;
+            resultContainer.style.display = 'block';
+           setTimeout(() => {
+            resultContainer.style.display = 'none';
+        }, 100000);
+        }
+
+        function calculateValues() {
+            const n1 = parseFloat(document.getElementById('n1').value);
+            const d1 = parseFloat(document.getElementById('d1').value);
+            const n2 = parseFloat(document.getElementById('n2').value);
+            const d2 = parseFloat(document.getElementById('d2').value);
+            const alphaBetaRatio = parseFloat(document.getElementById('alphaBetaRatio').value);
+
+            if (
+                (isNaN(n1) && (isNaN(d1) || isNaN(n2) || isNaN(d2) || isNaN(alphaBetaRatio))) ||
+                (isNaN(d1) && (isNaN(n1) || isNaN(n2) || isNaN(d2) || isNaN(alphaBetaRatio))) ||
+                (isNaN(n2) && (isNaN(n1) || isNaN(d1) || isNaN(d2) || isNaN(alphaBetaRatio))) ||
+                (isNaN(d2) && (isNaN(n1) || isNaN(d1) || isNaN(n2) || isNaN(alphaBetaRatio))) ||
+                (isNaN(alphaBetaRatio) && (isNaN(n1) || isNaN(d1) || isNaN(n2) || isNaN(d2)))
+            ) {
+                alert('Please provide other values');
+                return;
+            }
+
+            if (isNaN(n1)) {
+                const message = `n1: ${((n2 * d2 * (1 + d2 / alphaBetaRatio)) / (d1*( 1 + d1 / alphaBetaRatio))).toFixed(2)}`;
+                displayMessage(message);
+            } else if (isNaN(d1)) {
+                const message = `d1: ${((Math.sqrt(alphaBetaRatio*(n2*d2)/n1*(1+d2/alphaBetaRatio)+(1/2 *alphaBetaRatio)^2)-(1/2 *alphaBetaRatio))).toFixed(2)}`;
+                displayMessage(message);
+            } else if (isNaN(n2)) {
+                const message = `n2: ${((n1 * d1 * (1 + d1 / alphaBetaRatio)) / (d2*(1 + d2 / alphaBetaRatio))).toFixed(2)}`;
+                displayMessage(message);
+            } else if (isNaN(d2)) {
+                const message = `d2: ${((Math.sqrt((alphaBetaRatio*n1*d1)/n2*(1+d1/alphaBetaRatio)+(1/2 *alphaBetaRatio)^2)- (1/2 *alphaBetaRatio))).toFixed(2)}`;
+                displayMessage(message);
+            } else if (isNaN(alphaBetaRatio)) {
+                const message = `Alpha/Beta Ratio: ${(n1 * d1 * (1 + d1 / alphaBetaRatio)) / (n2 * d2 * (1 + d2 / alphaBetaRatio)).toFixed(2)}`;
+                displayMessage(message);
+            }
+        }
+    </script>
+    <footer>
+        <small>Tác giả: nhóm 1 hihi</small>
+        <small>Liên hệ: nhom1@example.com</small>
+    </footer>
+</body>
+</html>
