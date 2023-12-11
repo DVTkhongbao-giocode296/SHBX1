@@ -6,88 +6,122 @@
     <div class="nav">
         <a href="index.html">Home</a>
         <a href="BED.html">BIOLOGICAL EFFECTIVE DOSE (BED)</a>
-        <a href="PLS.html">DOSAGE ERRORS</a>
+        <a href="PLS.html">CORRECTION FOR ERRORS</a>
         <a href="PDDT.html">REGIMEN TREATMENT CHANGE CALCULATOR</a>
     </div>
-    <title>DOSAGE ERRORS</title>
+    <title>CORRECTION FOR ERRORS
+</title>
   <link rel="stylesheet" href="PLS.css">
   <h1>
-    <center>DOSAGE ERRORS </center>
+    <center>CORRECTION FOR ERRORS
+ </center>
       </h1>
 </head>
 <body>
     <div class="form-container">
     <form id="doseForm">
       <div>
-      <label for="dp">The number of planning dose (dp): </label> 
-      <input class="o" type="number" id="dp">
+      <label for="dp">Planned dosing (dp): </label> 
+      <input class="o" type="number" step="0.01" min="0.01" required  id="dp">
     </div>
     <br>
     <div>
-      <label for="np">Dose of planning (np): </label>
-      <input class="o" type="number" id="np">
+      <label for="np">Fractions of planning (np): </label>
+      <input class="o" type="number" step="0.01" min="0.01" required  id="np" >
     </div>
     <br>
     <div>
-      <label for="de">The Dose Error (de): </label>
-      <input class="o" type="number" id="de"> 
+      <label for="de">Wrong dosing (de): </label>
+      <input class="o" type="number" step="0.01" min="0.01" required  id="de"> 
     </div>
     <br>
     <div>
-      <label for="ne">Dose Error (ne): </label>
-      <input class="o" type="number" id="ne">
+      <label for="ne">Fractions Error (ne): </label>
+      <input class="o" type="number" step="0.01" min="0.01" required  id="ne">
     </div>
     <br>
     <div>
-      <button id="calculate" class="cal"><b>Calculator</b></button>
+      <button type="button" onclick="calculateValues(event)"><b>Calculate</b></button>
       <p id="result"></p>
     </div>
     <br>
     </form>
     <form id="csdlForm">
-    <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 tool-side">
-      <p><em>Disclaimer: This calculator is offered freely as a helpful tool. All outputs should be independently verified, and the user is solely responsible for the use of the calculator and any results. Radformation disclaims any warranties and is not responsible for how this tool is utilized or the results it provides.</em></p>
-      <h2><b>BED CALCULATOR</b><br></h2>
-      <p>In a routine clinical environment, it can be difficult to determine the most effective fractionation for a patient undergoing treatment. Biological Effective Dose (BED) and Equivalent Dose in 2Gy Fractions (EQD2) are often used to quantify radiobiological concepts into concrete interpretable values. Here, we present a BED/EQD2 calculator and a brief background on the topic and its applications.</p>
-      <h4>Biologically Effective Dose—The Basics<br></h4>
-      <p>Biologically effective dose (BED), as coined by the British Journal of Radiology some three decades ago, is an attempt to quantify the biological effect (log cell kill) of radiation dose delivery. The formula for BED was derived from the familiar linear-quadratic cell survival model:</p>
-    <div class="img-box">
-      <img src="https://blog.radformation.com/hs-fs/hubfs/Imported_Blog_Media/Eq-1-2.png?width=454&height=150&name=Eq-1-2.pngfasd" alt="E=αD+βD2">
+    <div>
+      <p><em>Disclaimer: This calculator is offered freely as a helpful tool. All outputs should be independently verified, and the user is solely responsible for the use of the calculator and any results. WE - GROUP 1 disclaims any warranties and is not responsible for how this tool is utilized or the results it provides.</em></p>
+      <h2><b>CORRECTION FOR ERRORS</b><br></h2>
+      <p>Dosimetric errors in delivering the prescribed dose per fraction made early in a treatment can be corrected by modifying the dose per fraction and total dose given subsequently to discovery of the error, using the LQ model to calculate the correcting doses which should be completed within the same overall time as originally prescribed.
+</p>
+      <p> The Mike Joiner  showed how to calculate the dose per fraction used to bring the treatment back exactly to planned tolerance simultaneously for all tissues and tumour involved, following either hyperfractionated or hypofractionated errors made initially, without the need to know any α/β values.
+      </p>
+      <p> The Mike Joiner method definitions:
+      </p>
+      <ul>
+        <li> The planned total dose is:
+          Dp Gy at dp Gy/fraction </li>
+        <li> The dose given erroneously is:
+  De Gy at de Gy/fraction </li>
+        <li> The dose required to complete the course is: Dc Gy at dc Gy/fraction in Nc fractions
+        </li>
+      </ul>
+      <p>
+         Defining planned treatment as dp Gy per fraction to a total dose Dp Gy,suppose the initial error is de Gy per fraction given to a total of De Gy. Using the LQ model to describe all isoeffect relationships between total dose and dose per fraction for the tumour and the normal tissues, then the compensating dose per fraction of dc Gy to a total dose of Dc Gy are given by the simple formulae:
+      </p>
+       <div class="img-box">
+      <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-08%20lu%CC%81c%2022.02.42.png?v=1702047773181" alt="Dc= Dp-De ">
       </div>
-    <p>The equation determines the biological effect (E) as a function of dose (D), the linear dose damage response (α), and the quadratic dose response in tissue (β).</p>
-    <p>In general, cell injury can be classified into three categories.</p>
-    <ul>
-      <li>Lethal damage: unrepairable and will lead to cell death</li>
-      <li>Sublethal damage: interactions that are not singularly lethal but can combine to result in cell death</li>
-    </ul>
-        
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-08%20lu%CC%81c%2022.03.56.png?v=1702047909643" alt ="dc=(Dp*dp-De*de)/(Dp-De)">
+      </div>
+      <h4> Example: <br></h4>
+      <p>  According to the plan, a patient must have 30 fractions, each day with each dose being 1.8Gy. But due to an error, the patient received the first 5 fractions with each dose being 2Gy. How is the treatment regimen adjusted so that the patient still receives the same treatment effect on the tumor and protection on healthy organs as the initia treatment?
+      </p>
+      <p>We have the formulae about correction for error in clinical practice:
+      </p> 
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-09%20lu%CC%81c%2023.30.46.png?v=1702139460571">
+      </div>
+      <p> We also have: </p>
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-08%20lu%CC%81c%2022.10.49.png?v=1702048260046" alt=" Dp=n.dp=30.1,8= 54 Gy">
+      </div>
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-08%20lu%CC%81c%2022.14.22.png?v=1702048478097" alt="dc=(Dp*dp-De*de)/(Dp-De)">
+      </div>
+      <p>Finally, we have the dose required to complete the course is dc=1,75 Gy ; nc= 25 fractions </p>  
   </div></form>
   </div>
-   <div class="notification-container" id="notificationContainer">
-        <div class="notification" id="notification"></div>
-    </div>
+   <div id="result-notification1">
+      <p id="result1"></p>
+      </div>
     <script>
-        function calculateAdjustedDose() {
-            var dp = parseFloat(document.getElementById('dp').value);
-            var np = parseFloat(document.getElementById('np').value);
-            var de = parseFloat(document.getElementById('de').value);
-            var ne = parseFloat(document.getElementById('ne').value);
-            var dc = (np * dp * dp - ne * de * de) / (np * dp - ne * de);
-            var nc = np * dp - ne * de;
-           
-            var notificationContainer = document.getElementById('notificationContainer');
-            var notification = document.getElementById('notification');
-            notification.innerText = 'The number of adjusting dose: ' + dc;
-            notificationContainer.style.display = 'block';
+        function calculateValues(event) {
+            event.preventDefault();
+          
+            const dp = parseFloat(document.getElementById('dp').value);
+const np = parseFloat(document.getElementById('np').value);
+const de = parseFloat(document.getElementById('de').value);
+const ne = parseFloat(document.getElementById('ne').value);
+const dc = (np * dp * dp - ne * de * de) / (np * dp - ne * de);
+const nc = (np * dp - ne * de)/dc;
+          const dc1 = dc.toFixed(2);
+          const nc1 = nc.toFixed(0);
 
-            setTimeout(function () {
-                notificationContainer.style.display = 'none';
-            }, 10000);
+const resultNotification1 = document.getElementById('result-notification1');
+const resultElement = document.getElementById('result1');
+resultNotification1.innerText = 'The adjusted dose :' + dc1 + ',The adjusted number of fractions: ' + nc1;
+resultElement.innerHTML = "dc = " + dc1 + ", nc = " + nc1;
+resultNotification1.style.display = 'block';
+
+setTimeout(function () {
+    resultNotification1.style.display = 'none';
+}, 3000 );
         }
-        document.getElementById('calculate').addEventListener('click', calculateAdjustedDose);
+        document.getElementById('myForm').addEventListener('submit', calculateValues);
     </script>
-  <footer>
-        <small> By radiobiology group 1: Tủng, Hỷ, Khôi, Linh, Thư, Anh, An, Thảo</small>
-    </footer>
+   <footer>
+    <small> Group 1:Thảo Linh, Minh Khôi, Nhật Thảo, Thúy An, Hồng Anh, Gia Hỷ, Văn Tùng, Anh Thư
+     </small>
+  </footer>
 </body>
 </html>
