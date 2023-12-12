@@ -6,7 +6,7 @@
     <div class="nav">
         <a href="index.html">Home</a>
         <a href="BED.html">BIOLOGICAL EFFECTIVE DOSE (BED)</a>
-        <a href="PLS.html">DOSAGE ERRORS</a>
+        <a href="PLS.html">CORRECTION FOR ERRORS</a>
         <a href="PDDT.html">REGIMEN TREATMENT CHANGE CALCULATOR</a>
     </div>
     <title>BED Calculator with Tumor Proliferation</title>
@@ -63,26 +63,77 @@
       </div>
   </form>
     <form id="csdlForm">
-    <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6 tool-side">
-      <p><em>Disclaimer: This calculator is offered freely as a helpful tool. All outputs should be independently verified, and the user is solely responsible for the use of the calculator and any results. Radformation disclaims any warranties and is not responsible for how this tool is utilized or the results it provides.</em></p>
-      <h2><b>BED CALCULATOR</b><br></h2>
-      <p>In a routine clinical environment, it can be difficult to determine the most effective fractionation for a patient undergoing treatment. Biological Effective Dose (BED) and Equivalent Dose in 2Gy Fractions (EQD2) are often used to quantify radiobiological concepts into concrete interpretable values. Here, we present a BED/EQD2 calculator and a brief background on the topic and its applications.</p>
+    <div class="csdlF">
+      <p><em>Disclaimer: This calculator is offered freely as a helpful tool. All outputs should be independently verified, and the user is solely responsible for the use of the calculator and any results. WE - GROUP 1 disclaims any warranties and is not responsible for how this tool is utilized or the results it provides.</em></p>
+      <h2><b>Biologically Effective Dose</b><br></h2>
+      <p>
+        <em><b>Preface:</b></em> In a routine clinical environment, it can be difficult to determine the most effective fractionation for a patient undergoing treatment. Calculating BED allows a physical dose to be converted into a dose that describes the biological effect of the radiation on a tumor or normal tissue to create quality radiation plans that reduce errors and treat patients faster. 
+        Here, we present a BED calculator and a brief background on the topic and its applications.
+      </p>
       <h4>Biologically Effective Dose—The Basics<br></h4>
-      <p>Biologically effective dose (BED), as coined by the British Journal of Radiology some three decades ago, is an attempt to quantify the biological effect (log cell kill) of radiation dose delivery. The formula for BED was derived from the familiar linear-quadratic cell survival model:</p>
-    <div class="img-box">
-      <img src="https://blog.radformation.com/hs-fs/hubfs/Imported_Blog_Media/Eq-1-2.png?width=454&height=150&name=Eq-1-2.pngfasd" alt="E=αD+βD2">
+      <p>
+        BED, or Biologically Effective Dose, is a linear-quadratic (LQ)-based formula that considers, in particular, cell survival (S) in radiation treatments with n fractions and d dose per fraction delivered in tissues characterized by LQ parameters α and α/β.
+      </p>
+      <div class="img-box">
+      <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-09%20lu%CC%81c%2023.42.44.png?v=1702140174411" alt="BED= D [1+ d /(α /β)]">
       </div>
-    <p>The equation determines the biological effect (E) as a function of dose (D), the linear dose damage response (α), and the quadratic dose response in tissue (β).</p>
-    <p>In general, cell injury can be classified into three categories.</p>
-    <ul>
-      <li>Lethal damage: unrepairable and will lead to cell death</li>
-      <li>Sublethal damage: interactions that are not singularly lethal but can combine to result in cell death</li>
-    </ul>
-      
+      <p>As an inherent part of the LQ SF model, the origin of BED is explained in the following way. The radiation cell kill (or effect, E) can be expressed as:</p>
+      <div class="img-box">
+      <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/bed3.png?v=1702053051759" alt="E=αD+βD2">
+      </div>
+      <p>
+        The equation determines the biological effect (E) as a function of dose (D), where is D=n.d , the linear dose damage response (α), and the quadratic dose response in tissue (β).
+      </p>
+      <p>
+        α represents events per cell per unit dose (unit is Gy-1), characterizing the mechanism of death mainly at low doses, while β represents events per cell per unit dose squared (unit is Gy-2), characterizing the main lethal mechanism at high doses.The α/β ratio represents the dose at which linear and quadratic components of cell killing are equal for a given tissue. A low α/β ratio (~3) indicates a late response, and a high ratio (~10) suggests an early response in tissue. 
+      </p>
+      <div class="img-box">
+      <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/bed4.png?v=1702052875837" alt="BED=nd(1+(d/(alpha/beta)))">
+      </div>
+      <h4>The Cell repopulation (CR)<br></h4>
+      <p>
+        In order to evaluate the potential clinical outcome of the three schedules, we used the radiobiological formulation based on the LQ model. 
+      </p>
+      <p>
+        With the introduction of BED in radiotherapy, the biological effects of radiation treatments have been characterized with BED with generic values of α/β = 10 Gy for tumors and α/β = 3 Gy for normal tissues. The biologically effective dose for the tumor was calculated according to the formula derived from the linear quadratic model, including the repopulation effect correction. This correction must be taken into account for post-operative breast tumors treated with radiotherapy because surgical resection can leave behind a handful of viable cells, which, because they are then well vascularized, are capable of rapid growth.
+      </p>
+      <div class="img-box">
+      <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-09%20lu%CC%81c%2023.35.53.png?v=1702139820328" alt="E=αD+βD2">
+      </div>
+      <p>
+        Where d is the fraction size (Gy) and n is the number of fractions. T is the overall treatment time. Td is the delay time to the onset of accelerated repopulation. From the literature (Wyatt), an effective doubling time Teff of 26 days is assumed to start immediately after surgery, and Td is considered zero. K (Gy/day) is the biological dose per day required to compensate for ongoing tumor cell repopulation, calculated based on Tpot (potential doubling time) and α (radiosensitivity coefficient):
+      </p>
+      <div class="img-box">
+      <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/bed6.png?v=1702054429467" alt="E=αD+βD2">
+      </div>
+      <h4>Conclusion<br></h4>
+      <p>
+        The Biological Effective Dose (BED) calculator is an important tool in understanding tumor and normal tissue responses across different treatment modalities and fractionation schemes.
+      </p>
+      <h4>
+        Example <br>
+      </h4>
+      <p> A head and neck cancer's patient is exposured 30 times, with 2Gy for each times in 6 weeks. Calculate BED for 2 cases: not repopulation of tumor and repopulation of tumor. With α/β = 3 for late reaction tissues and α/β = 10 for early reaction tissues. Beside, we also know k=0.9, T_delay= 28 days (neck-head cancer)</p>
+      <p>
+        In case of not repopulation of tumor: 
+      </p>
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/BED72png?v=1702216546535">
+      </div>
+      <p>
+        In case of repopulation of tumor:
+      </p>
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-09%20lu%CC%81c%2023.35.53.png?v=1702139820328">
+      </div>
+      <p>
+        With:
+      </p>
+      <div class="img-box">
+        <img src="https://cdn.glitch.global/19cc86b7-95e9-4381-bd14-c6e50652f217/A%CC%89nh%20ma%CC%80n%20hi%CC%80nh%202023-12-10%20lu%CC%81c%2021.02.39.png?v=1702216971457">
+      </div>
       </div></form> 
   </div>
-
-
 <script>
     function updateSliderValue1() {
         var slider1 = document.getElementById('alphabetaRatio');
@@ -125,7 +176,7 @@
         const K = parseFloat(document.getElementById('proliferationConstant').value);
         
         if (alphabetaRatio < 1 || alphabetaRatio > 16) {
-            alert('The Alpha/Beta Ratio is less than 16.');
+            alert('The Alpha/Beta Ratio is over 1 and less than 16.');
             return;
         }
 
@@ -145,9 +196,10 @@
     }
 </script>
 <p>
- <footer>
-        <small> By radiobiology group 1: Tủng, Hỷ, Khôi, Linh, Thư, Anh, An, Thảo</small>
-    </footer>
+<footer>
+    <small>Group 1:Thảo Linh, Minh Khôi, Nhật Thảo, Thúy An, Hồng Anh, Gia Hỷ, Văn Tùng, Anh Thư
+     </small>
+  </footer>
 </p>
 </body>
 </html>
