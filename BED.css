@@ -1,26 +1,28 @@
- .nav {
-    overflow: hidden;
-    background-color: #333;
+.nav {
+            overflow: hidden;
+            background-color: #22668D;
         }
-.nav a {
+
+        .nav a {
             float: left;
             display: block;
-            color: #f2f2f2;
+            color: #FAEED1;
             text-align: center;
             padding: 14px 16px;
             text-decoration: none;
         }
+
         .nav a:hover {
-            background-color: #ddd;
+            background-color: #22668D;
             color: black;
         }
  body {
-    margin: 20px;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #FFFADD;
     color: #22668D;
     font-size: 20px;
     text-align:center;
+   margin: 0;
 }
   
   .h1 {
@@ -110,20 +112,75 @@
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
-              background-color: #c879db; 
+              background-color: #f7ade2; 
               padding: 15px;
               text-align: center;
               border-radius: 8px;
               box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
               z-index: 1000;
+              color: #3d323a;
           }
-          footer {
-            background-color: #333;
-            color: #f2f2f2;
+            footer {
+            background-color: #22668D;
+            color: #FAEED1;
             text-align: center;
-            padding: 10px;
-            position: bottom;
-            left: 0;
-            bottom: 0;
-            width: 100%;
+            padding: 20px 0px 20px 0px;
+              border-left: 20px;
+              margin-top: 40px;
+          
         }
+
+.img-box {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.img-box img {
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
+    border: 2px solid #cacaca;
+    border-radius: 10px;
+  }
+
+@media only screen and (max-width: 600px) {
+    .nav a {
+        float: left;
+        display: block;
+        color: #FAEED1;
+        text-align: left;
+        padding: 10px 12px;
+        text-decoration: none;
+        }
+            
+    .h1{
+        text-align: center;
+        font-family: 'Times New Roman', sans-serif;
+        height: 100px;
+        width: 100%; 
+        color: rgb(61, 126, 166);
+        font-size: 20px; 
+        margin-bottom: 0px; 
+        }
+  
+    body {
+          font-size: 16px; 
+            }
+
+    .form-container {
+        flex-direction: column; 
+        align-items: center; 
+        }
+
+    #calculatorForm, #csdlForm {
+        width: 70%; 
+        height: 650px;
+        font-size: 16px;
+        }
+
+    input[type="range"] {
+        width: 80%; 
+        margin: 0 10%; 
+        transform: translateY(0);
+        }
+    }
